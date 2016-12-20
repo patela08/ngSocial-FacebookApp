@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>
+            Testing JP    
+        </title>
+    </head>
+    <body ng-controller="some as vm">
+        <input ng-model="vm.title"/>
+        {{vm.title}}
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script>
+        angular.module("app",[]).controller("some",SomeController);
+function SomeController($scope, $log) {
+    var vm = this;
+    vm.title = 'Some Title';
+ $scope.$watch('vm.title', function(current, original) {
+        $log.info('vm.title was ', original);
+        $log.info('vm.title is now %s', current);
+    });
+}
+    </script>
+    </body>
+</html>
