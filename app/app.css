@@ -40,7 +40,7 @@ min-height:70px;
 {
 min-height:70px;
 margin-bottom:10px;
-border-bottom:dashed 1px #cc0000;
+border-bottom:dashed 1px #000000;
 }
 .stimg
 {
@@ -59,7 +59,8 @@ word-wrap:break-word;
 overflow:hidden;
 padding:5px;
 display:block;
-font-family:'Georgia', Times New Roman, Times, serif
+font-family:'Georgia', Times New Roman, Times, serif;
+
 }
 .sttime
 {
@@ -67,4 +68,12 @@ font-size:11px;
 color:#999;
 font-family:Arial, Helvetica, sans-serif;
 margin-top:5px;
+}
+
+.stlikes
+{
+  font-size:15px;
+  border-top: 1px solid dimgrey;
+  font-family:Arial, Helvetica, sans-serif;
+  margin-top:20px;
 }

@@ -16,17 +16,20 @@
                 };
             };
             function refresh() {
-                var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts,link,likes,permissions"
+                var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts.limit(5000){story,message,created_time,id,likes.limit(5000)},link,likes.limit(500),permissions"
+                var gettingLikes = "/me?fields=posts.limit(5){name,posts.limit(5)";
                 fbFactory.postData(postUrl).then(refreshLogin,refreshErr);
                 function refreshLogin(response){
                     console.log(response);
                     fvm.responseRes = response;
-                    // $.each(response.posts.data,postLikes);
+                    // $.each(response,postLikes);
                     // function postLikes(index,item) {
-                    //     console.log(item);
-                    //     fbFactory.postData("/"+item.id+"/likes").then(gettingView,refreshErr);
+                    //     console.log(item.data);
+                    //     fbFactory.postData("/"+item.id+"/Url").then(gettingView,refreshErr);
                     // };
-                    //gettingView(response);
+                    // function gettingView(response){
+                    //     console.log(response);
+                    // };
                     fvm.welcomeMsg = "Welcome "+ response.name;
                 }
             }
