@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular.module('myApp.facebook')
         .controller('FacebookCtrl', ['fbFactory',function(fbFactory) {
             var fvm = this;
@@ -15,12 +14,26 @@
                     refresh();
                 };
             };
+            var popSpinner = {
+                radius: 20,
+                height: 15,
+                width: 10.5,
+                dashes: 25,
+                opacity: 0.95,
+                padding: 3,
+                rotation: 800,
+                color: '#000000'
+            };
             function refresh() {
-                var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts.limit(5000){story,message,created_time,id,likes.limit(5000)},link,likes.limit(500),permissions"
-                var gettingLikes = "/me?fields=posts.limit(5){name,posts.limit(5)";
+                var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts.limit(50000){story,comments,message,created_time,id,likes.limit(5000)},link,likes.limit(500),permissions"
+                var gettingLikes = "/me?fields=comments.limit(5){id}";
+                var target  = $("#userPost");
+                var spinner = Spinners.create((target),popSpinner).play();
+                spinner.center();
                 fbFactory.postData(postUrl).then(refreshLogin,refreshErr);
                 function refreshLogin(response){
                     console.log(response);
+                    Spinners.get(target).remove();
                     fvm.responseRes = response;
                     // $.each(response,postLikes);
                     // function postLikes(index,item) {
@@ -44,7 +57,6 @@
                 var dataPost = {
                     message: fvm.usercomment
                 };
-                console.log(dataPost);
                 fbFactory.statusPost('/me/feed',dataPost).then(function (response) {
                     refresh();
                     fvm.usercomment = "";

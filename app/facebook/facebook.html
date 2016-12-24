@@ -6,8 +6,11 @@
         <button type="button" class="btn btn-default" ng-if="fbc.isLoggedIn" ng-click="fbc.logOut()">Logout</button>
         <br/>
         <br/>
+        <!--<div id="spin"></div>-->
+        <div id="userInfo"></div>
         <div class="well" ng-if="fbc.isLoggedIn">
             <h4>User Info</h4>
+
             <ul>
                 <li>ID:{{fbc.responseRes.id}}</li>
                 <li>First Name: {{fbc.responseRes.name.split(" ")[0]}}</li>
@@ -21,11 +24,13 @@
         <br/>
         <div class="well" ng-if="fbc.isLoggedIn">
             <h4>Permission</h4>
+
             <ul>
                 <li ng-repeat="permissions in fbc.responseRes.permissions.data">
                     {{permissions.permission}}
                 </li>
             </ul>
+
         </div>
     </div>
     <div class="col-md-8">
@@ -40,7 +45,6 @@
             </form>
             <br/>
         </div>
-
         <div class="well stbody" ng-repeat="data in fbc.responseRes.posts.data">
 
             <div class="stimg">
@@ -57,4 +61,5 @@
             </div>
         </div>
     </div>
+    <div id="userPost"></div>
 </div>
