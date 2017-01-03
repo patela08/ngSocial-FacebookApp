@@ -5,33 +5,43 @@
             var fvm = this;
             fvm.welcomeMsg = "Please LogIn";
             fvm.isLoggedIn = false;//to add/remove login btn
+            fvm.counter  = function (count) {
+                count++;
+            }
+
+            var popSpinner = {
+                radius: 20,
+                height: 20,
+                width: 8.5,
+                dashes: 20,
+                opacity: 0.95,
+                padding: 3,
+                rotation: 800,
+                color: '#000000'
+            };
 
             // for login
+
             fvm.logIn = function logIn() {
+                fvm.loadingImg = true;
                 fbFactory.logIn().then(successLogin,refreshErr);
                 function successLogin() {
                     fvm.isLoggedIn = !fvm.isLoggedIn;
                     refresh();
                 };
             };
-            var popSpinner = {
-                radius: 20,
-                height: 15,
-                width: 10.5,
-                dashes: 25,
-                opacity: 0.95,
-                padding: 3,
-                rotation: 800,
-                color: '#000000'
-            };
+
+
             function refresh() {
                 var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts.limit(50000){story,comments,message,created_time,id,likes.limit(5000)},link,likes.limit(500),permissions"
                 var gettingLikes = "/me?fields=comments.limit(5){id}";
                 var target  = $("#userPost");
-                var spinner = Spinners.create((target),popSpinner).play();
+                var target1 = $("#userInfo");
+                var spinner = Spinners.create(target,popSpinner).play().center();
                 spinner.center();
                 fbFactory.postData(postUrl).then(refreshLogin,refreshErr);
                 function refreshLogin(response){
+                    fvm.loadingImg = false;
                     console.log(response);
                     Spinners.get(target).remove();
                     fvm.responseRes = response;
@@ -72,6 +82,17 @@
                    // refresh();
                 };
             };
-           //refresh();//so that user keeps logged in/out(depending on whether he was logged in or out before refershing the page) if user refreshes the page
+            //refresh();//so that user keeps logged in/out(depending on whether he was logged in or out before refershing the page) if user refreshes the page
+            fvm.likePost = function likePost(index) {
+                var id = index.data.id;
+                var dataPost = {
+                    message: "this is a test for liking the post"
+                };
+                fbFactory.likes("/"+id+"/likes",dataPost).then(function (response) {
+                    console.log(response);
+                },function (reject) {
+                    console.log(reject);
+                })
+            }
         }]);
 })();

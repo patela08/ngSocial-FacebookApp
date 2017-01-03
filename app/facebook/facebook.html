@@ -7,11 +7,10 @@
         <br/>
         <br/>
         <!--<div id="spin"></div>-->
-        <div id="userInfo"></div>
         <div class="well" ng-if="fbc.isLoggedIn">
             <h4>User Info</h4>
-
-            <ul>
+            <!--<div ng-if="fbc.loadingImg"><img src="./../bower_components/spinners-master/8.gif" alt="loading">Loading Please Wait......</div>-->
+            <ul ng-if="!fbc.loadingImg">
                 <li>ID:{{fbc.responseRes.id}}</li>
                 <li>First Name: {{fbc.responseRes.name.split(" ")[0]}}</li>
                 <li>Last Name: {{fbc.responseRes.last_name}}</li>
@@ -57,7 +56,8 @@
                 </div>
             </div>
             <div class="stlikes">
-                <span class="glyphicon glyphicon-thumbs-up">{{data.likes.data.length || 0}}</span>
+                <span class="glyphicon glyphicon-thumbs-up custom" ng-click="fbc.likePost(this)">{{data.likes.data.length || 0}}</span>
+                <span ng-repeat="data1 in data.likes.data | limitTo:3">{{data1.name}} <span ng-if="fbc.counter(2)==2">{{data.likes.data.length}}</span> </span>
             </div>
         </div>
     </div>

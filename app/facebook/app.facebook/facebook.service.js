@@ -17,12 +17,14 @@
 
                     defer = $q.defer();
                     FB.api(data).then(refreshLogin,refreshErr);
+                   // console.log(defer);
                     return defer.promise;
 
                 },
                 logIn: function logIn() {
                     defer = $q.defer();
                     FB.login().then(refreshLogin,refreshErr);
+                    console.log(defer);
                     return defer.promise;
                 },
                 statusPost: function stausPost(data,postdata) {
@@ -34,6 +36,12 @@
                 logOut: function logOut() {
                     defer = $q.defer();
                     FB.logout().then(refreshLogin,refreshErr);
+                    return defer.promise;
+                },
+                likes: function (id ,data) {
+                    console.log(data);
+                    defer = $q.defer();
+                    FB.api(id,"POST").then(refreshLogin,refreshErr);
                     return defer.promise;
                 }
             }
