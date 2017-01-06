@@ -1,0 +1,13 @@
+<div class="well" ng-if="fbc.isLoggedIn">
+    <h4>User Info</h4>
+    <!--<div ng-if="fbc.loadingImg"><img src="./../bower_components/spinners-master/8.gif" alt="loading">Loading Please Wait......</div>-->
+    <ul ng-if="!fbc.loadingImg">
+        <li>ID:{{fbc.responseRes.id}}</li>
+        <li>First Name: {{fbc.responseRes.name.split(" ")[0]}}</li>
+        <li>Last Name: {{fbc.responseRes.last_name}}</li>
+        <li>Email: {{fbc.responseRes.email}}</li>
+        <li>Gender:{{fbc.responseRes.gender}}</li>
+        <li>Locale:{{fbc.responseRes.locale}}</li>
+        <li>User Likes:{{fbc.responseRes.likes.data.length}}</li>
+    </ul>
+</div>

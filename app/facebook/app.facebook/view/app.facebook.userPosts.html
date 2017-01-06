@@ -1,0 +1,16 @@
+<div class="well stbody" ng-repeat="data in fbc.responseRes.posts.data">
+
+    <div class="stimg">
+        <a target="_blank" href="{{fbc.responseRes.link}}"><img ng-src="{{fbc.responseRes.picture.data.url}}" ng-if="fbc.responseRes.picture.data.url"/></a>
+    </div>
+    <div class="sttext">
+        {{data.story || data.message}}
+        <div class="sttime">
+            {{data.created_time | date :  "dd.MM.y"}}
+        </div>
+    </div>
+    <div class="stlikes">
+        <span class="glyphicon glyphicon-thumbs-up custom" ng-click="fbc.likePost(this)">{{data.likes.data.length || 0}}</span>
+        <span ng-repeat="data1 in data.likes.data | limitTo:3">{{data1.name}} <span ng-if="fbc.counter(2)==2">{{data.likes.data.length}}</span> </span>
+    </div>
+</div>

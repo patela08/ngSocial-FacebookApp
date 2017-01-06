@@ -1,0 +1,10 @@
+<div class="well" ng-if="fbc.isLoggedIn">
+    <h4>Permission</h4>
+
+    <ul>
+        <li ng-repeat="permissions in fbc.responseRes.permissions.data">
+            {{permissions.permission}}
+        </li>
+    </ul>
+
+</div>

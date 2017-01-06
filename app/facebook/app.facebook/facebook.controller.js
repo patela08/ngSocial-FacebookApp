@@ -7,7 +7,7 @@
             fvm.isLoggedIn = false;//to add/remove login btn
             fvm.counter  = function (count) {
                 count++;
-            }
+            };
 
             var popSpinner = {
                 radius: 20,
@@ -34,9 +34,8 @@
 
             function refresh() {
                 var postUrl = "/me?fields=id,name,picture,email,last_name,gender,locale,posts.limit(50000){story,comments,message,created_time,id,likes.limit(5000)},link,likes.limit(500),permissions"
-                var gettingLikes = "/me?fields=comments.limit(5){id}";
+                //var gettingLikes = "/me?fields=comments.limit(5){id}";
                 var target  = $("#userPost");
-                var target1 = $("#userInfo");
                 var spinner = Spinners.create(target,popSpinner).play().center();
                 spinner.center();
                 fbFactory.postData(postUrl).then(refreshLogin,refreshErr);

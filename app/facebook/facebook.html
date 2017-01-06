@@ -7,59 +7,14 @@
         <br/>
         <br/>
         <!--<div id="spin"></div>-->
-        <div class="well" ng-if="fbc.isLoggedIn">
-            <h4>User Info</h4>
-            <!--<div ng-if="fbc.loadingImg"><img src="./../bower_components/spinners-master/8.gif" alt="loading">Loading Please Wait......</div>-->
-            <ul ng-if="!fbc.loadingImg">
-                <li>ID:{{fbc.responseRes.id}}</li>
-                <li>First Name: {{fbc.responseRes.name.split(" ")[0]}}</li>
-                <li>Last Name: {{fbc.responseRes.last_name}}</li>
-                <li>Email: {{fbc.responseRes.email}}</li>
-                <li>Gender:{{fbc.responseRes.gender}}</li>
-                <li>Locale:{{fbc.responseRes.locale}}</li>
-                <li>User Likes:{{fbc.responseRes.likes.data.length}}</li>
-            </ul>
-        </div>
+        <user-info></user-info>
         <br/>
-        <div class="well" ng-if="fbc.isLoggedIn">
-            <h4>Permission</h4>
-
-            <ul>
-                <li ng-repeat="permissions in fbc.responseRes.permissions.data">
-                    {{permissions.permission}}
-                </li>
-            </ul>
-
-        </div>
+        <user-permission></user-permission>
     </div>
     <div class="col-md-8">
         <h3>Welcome to Facebook !!!!</h3>
-        <div ng-if="fbc.isLoggedIn">
-            <form ng-submit="fbc.statusPost()" class="ng-pristine ng-valid">
-                <div class="form-group">
-                    <label>Status Update</label>
-                    <textarea ng-model="fbc.usercomment" class="form-control" ></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <br/>
-        </div>
-        <div class="well stbody" ng-repeat="data in fbc.responseRes.posts.data">
-
-            <div class="stimg">
-                <a target="_blank" href="{{fbc.responseRes.link}}"><img ng-src="{{fbc.responseRes.picture.data.url}}" ng-if="fbc.responseRes.picture.data.url"/></a>
-            </div>
-            <div class="sttext">
-                {{data.story || data.message}}
-                <div class="sttime">
-                    {{data.created_time | date :  "dd.MM.y"}}
-                </div>
-            </div>
-            <div class="stlikes">
-                <span class="glyphicon glyphicon-thumbs-up custom" ng-click="fbc.likePost(this)">{{data.likes.data.length || 0}}</span>
-                <span ng-repeat="data1 in data.likes.data | limitTo:3">{{data1.name}} <span ng-if="fbc.counter(2)==2">{{data.likes.data.length}}</span> </span>
-            </div>
-        </div>
+        <user-submit></user-submit>
+        <user-posts></user-posts>
     </div>
     <div id="userPost"></div>
 </div>
