@@ -8,7 +8,15 @@
             fvm.counter  = function (count) {
                 count++;
             };
-
+            fvm.statusPost = function statusPost() {
+                var dataPost = {
+                    message: fvm.usercomment
+                }
+                fbFactory.statusPost('/me/feed',dataPost).then(function (response) {
+                    refresh();
+                    fvm.usercomment = "";
+                })
+            };
             var popSpinner = {
                 radius: 20,
                 height: 20,
@@ -19,7 +27,9 @@
                 rotation: 800,
                 color: '#000000'
             };
-
+            var fvm = this;
+            fvm.welcomeMsg = "Please LogIn";
+            fvm.isLoggedIn = false;//to add/remove login btn
             // for login
 
             fvm.logIn = function logIn() {
@@ -28,7 +38,7 @@
                 function successLogin() {
                     fvm.isLoggedIn = !fvm.isLoggedIn;
                     refresh();
-                };
+                }
             };
 
 
@@ -44,14 +54,6 @@
                     console.log(response);
                     Spinners.get(target).remove();
                     fvm.responseRes = response;
-                    // $.each(response,postLikes);
-                    // function postLikes(index,item) {
-                    //     console.log(item.data);
-                    //     fbFactory.postData("/"+item.id+"/Url").then(gettingView,refreshErr);
-                    // };
-                    // function gettingView(response){
-                    //     console.log(response);
-                    // };
                     fvm.welcomeMsg = "Welcome "+ response.name;
                 }
             }
@@ -62,25 +64,18 @@
                 fvm.isLoggedIn = false;
             }
 
-            fvm.statusPost = function statusPost() {
-                var dataPost = {
-                    message: fvm.usercomment
-                };
-                fbFactory.statusPost('/me/feed',dataPost).then(function (response) {
-                    refresh();
-                    fvm.usercomment = "";
-                });
-            };
-
             fvm.logOut = function logOut(){
                 fbFactory.logOut().then(logOutSuccess,refreshErr);
                 function logOutSuccess(){
                     fvm.responseRes = {};
                     fvm.isLoggedIn = !fvm.isLoggedIn;
                     fvm.welcomeMsg = "Please Login";
-                   // refresh();
-                };
-            };
+                    // refresh();
+                }
+            }
+
+
+
             //refresh();//so that user keeps logged in/out(depending on whether he was logged in or out before refershing the page) if user refreshes the page
             fvm.likePost = function likePost(index) {
                 var id = index.data.id;

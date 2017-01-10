@@ -1,0 +1,7 @@
+<div>
+    <h4>{{fbc.welcomeMsg}}</h4>
+    <a target="_blank" href="{{fbc.responseRes.link}}"><img ng-src="{{fbc.responseRes.picture.data.url}}" ng-if="fbc.responseRes.picture.data.url"/></a>
+    <button type="button" class="btn btn-default" ng-if="!fbc.isLoggedIn" ng-click="fbc.logIn()">Login</button>
+    <button type="button" class="btn btn-default" ng-if="fbc.isLoggedIn" ng-click="fbc.logOut()">Logout</button>
+    <br/>
+</div>

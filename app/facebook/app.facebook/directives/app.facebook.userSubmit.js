@@ -6,7 +6,8 @@
         var userComment ={
             templateUrl:"./facebook/app.facebook/view/app.facebook.submit.html",
             restriction:"E",
-            controllerUrl:"./facebook.controller.js"
+            controllerUrl:"./facebook.controller.js",
+           // controllerAs:"uStats"
         };
         return userComment;
     }
